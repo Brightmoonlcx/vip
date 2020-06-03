@@ -1,0 +1,89 @@
+.header .header-inner {
+  width: 1000px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative; }
+  .header .header-inner .logo-left {
+    width: 125px;
+    height: 100px; }
+    .header .header-inner .logo-left a {
+      background-image: url("../img/jingling.png");
+      background-position: -308px -57px;
+      width: 125px;
+      height: 100px;
+      display: inline-block;
+      vertical-align: top;
+      line-height: 500px;
+      overflow: hidden; }
+  .header .header-inner .logo-right {
+    background-image: url(../img/jingling.png);
+    background-position: 0 0;
+    width: 304px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1; }
+
+.contentbox {
+  background-image: url(https://a.vpimg2.com/upload/flow/2019/01/29/88/15487540172274.jpg);
+  background-position: top center;
+  background-repeat: no-repeat;
+  height: 650px; }
+  .contentbox .content {
+    width: 1000px;
+    margin: 0 auto;
+    position: relative; }
+    .contentbox .content .login {
+      background: white;
+      width: 360px;
+      float: right;
+      top: 50px;
+      right: 0;
+      position: absolute; }
+      .contentbox .content .login .login-head {
+        width: 360px;
+        height: 51px; }
+        .contentbox .content .login .login-head div:first-child::after {
+          position: absolute;
+          top: 15px;
+          right: 0;
+          z-index: 1;
+          width: 1px;
+          height: 20px;
+          background-color: #ccc;
+          content: '';
+          font-size: 0;
+          line-height: 0; }
+        .contentbox .content .login .login-head div {
+          position: relative;
+          text-align: center;
+          line-height: 51px;
+          width: 180px;
+          font-size: 18px;
+          border-bottom: 1px solid #e0e0e0;
+          cursor: pointer; }
+      .contentbox .content .login .login-body {
+        width: 300px;
+        margin: 0 auto; }
+        .contentbox .content .login .login-body form input {
+          width: 300px;
+          height: 46px;
+          line-height: 46px;
+          margin-top: 25px; }
+        .contentbox .content .login .login-body form .number {
+          width: 150px; }
+        .contentbox .content .login .login-body form .check {
+          width: 15px;
+          height: 15px; }
+        .contentbox .content .login .login-body form .submitbutton {
+          margin-bottom: 30px;
+          background: #f10180;
+          color: white;
+          border: 1px solid #f10180; }
+
+.footer p {
+  text-align: center;
+  margin-top: 50px;
+  color: #666;
+  font-size: 12px; }

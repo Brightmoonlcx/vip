@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/list.css">
+  <link rel="stylesheet" href="../jquery-pagination/pagination.css">
+</head>
+
+<body>
+  <header>
+    <!-- navbar -->
+    <div class="navbox">
+        <div class="w1170 navbar ">
+            <div class="fl navbar-left">
+                <a href="">西安</a>
+                <a href="">+</a>
+            </div>
+            <div class="fr navbar-right">
+                <ul class="fl">
+                    <li><a href="../src/page/login.html">请登录</a></li>
+                    <li><a href="../src/page/register.html">注册</a></li>
+                    <li><a href="">签到有礼</a></li>
+                    <li><a href="">我的订单</a></li>
+                    <li><a href="">我的特卖</a></li>
+                    <li><a href="">会员俱乐部</a></li>
+                    <li><a href="">客户服务</a></li>
+                    <li><a href="">手机版</a></li>
+                    <li><a href="">更多</a></li>
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- 头部导航 -->
+    <div class="new-header">
+        <!-- 头部logo，搜索框， -->
+        <div class="content w1170">
+            <a href="" class="fl">
+                <div class="logo clear"><img src="../img/logo.png" alt=""></div>
+            </a>
+            <div class="servicelink fl">
+                <a href=""></a>
+                <a href=""></a>
+                <a href=""></a>
+                <img src="../img/servicelink.jpg" alt="">
+            </div>
+            <div class="goodsCar fr">
+                <a href="../src/page/cart.html">购物袋</a>      
+            </div> 
+            <div class="search-box fr">
+                <div class="searchbar">
+                    <div class="searchinput">
+                        <input type="text">
+                    </div>
+                    <div>
+                        <ul>
+                            <li><a href="">连衣裙</a></li>
+                            <li><a href="">护肤套装</a></li>
+                            <li><a href="">女式T恤</a></li>
+                            <li><a href="">女士休闲裤</a></li>
+                            <li><a href="">耐克Nike</a></li>
+                            <li><a href="">女单鞋</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+               
+        </div>
+        <div class="nav-head">
+            <ul class="w1170">
+                <li class="shopcategory"><a href="">商品分类</a></li>
+                <li><a href="">首页</a></li>
+                <li><a href="">亿元补贴</a></li>
+                <li><a href="">最后疯抢</a></li>
+                <li><a href="">唯品快抢</a></li>
+                <li><a href="./list.html?cat_one_id=食品酒水">女装</a></li>
+                <li><a href="./list.html?cat_one_id=童装玩具">母婴</a></li>
+                <li><a href="./list.html?cat_one_id=家装建材">家电</a></li>
+                <li><a href="./list.html?cat_one_id=奶粉尿裤">国际</a></li>
+                <li><a href="./list.html?cat_one_id=其他">美妆</a></li>
+                <li><a href="">鞋包</a></li>
+                <li><a href="">男装</a></li>
+                <li><a href="">更多</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+
+<div class="container clear">
+  <ul class="goodscontent w1170">
+    
+    
+  </ul>
+</div>
+
+  
+
+  
+  
+  
+  <br><br><br><br><br><br>
+
+  
+  <div class="pagi"></div>
+  <div class="M-box m-style">
+    
+  </div>
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../jquery-pagination/jquery.pagination.js"></script>
+  <script>
+    // 1,获取地址栏参数中的信息
+    // 2,根据地址栏的参数,向后台发起请求,来获取数据信息
+
+
+    // 将一组参数,转化为数组 
+    // arr[0] 存储的是 键名 cat_one_id
+    // arr[1] 存储的是 数据 也就是 家装建材等
+    let arr = (decodeURI(window.location.search).substring(1)).split('=');
+    console.log((decodeURI(window.location.search).substring(1)).split('='));  //获取请求栏参数
+    // console.log(arr);
+
+    // 首次执行ajax请求,返回请求内容
+    // 查询的是第一页的内容
+
+
+    getAjax(arr[1]); 
+    // console.log(arr[1]); 食品酒水
+
+    // 2,向数据库发送请求
+    // 数据的查询结果,一定非常多
+    // 需要分页显示
+    // 数据库需要发送的参数
+
+    // 需要将 ajax请求 封装为函数的形式
+    // 根据输入的不同参数,来执行不同的请求内容,获取不同的数据信息
+    // 需要3个参数
+    // 参数1:查询的关键词
+    // 参数2:查询的页数,就就是查询第几页的内容,默认值是1
+    // 参数3:查询每页的数据数量,默认值是8
+
+
+    // 响应体返回的数据中,包含分页请求的数据信息
+    // row : 关键词查询的数据总数
+    // sumPage : 根据 数据总数 以及 每页显示的数据数量 计算的总页数
+    // page : 当前页数
+
+    function getAjax(key , page=1 ,line=15) {
+      $.ajax({
+        url: '../server/goods_select.php',
+        data: {
+          // 需要查询的关键词,是前端页面发送的参数
+          // 也就是之前获取的arr[1]中存储的数据
+          cat_one_id: key,
+          // 当前显示的页面,是第几页
+          // 默认请求的是第一页内容
+          page: page,
+          // 每页显示的数据数量
+          // 数值根据实际页面情况,自己定义
+          // 当前每行是4列,最好是4个倍数
+          // 控制返回的响应体的数据数量
+          line: line,
+        },
+        // 传参类型是get类型
+        type: 'get',
+        // 返回值的类型是 json
+        dataType: 'json',
+        // 请求成功之后,执行的函数
+        success(res) {
+          // 需要根据响应体内容,生成页面
+          // 生成li,写入到ul中
+          console.log(res);
+
+          // 存储生成li标签的变量
+          let str = '';
+
+          // 循环遍历数组 res ,根据数据数量,生成li标签
+          // item 存储的就是 对应的 产品的数据信息
+          
+          res.forEach(function(item){
+            // console.log(item);
+            // 使用字符串拼接的方式来生成li标签
+            str +=`
+            <div class="goodsitem">
+              <a class="goodslink" href="./detail.html?goods_id=${item.goods_id}">
+                <div class="goodsitemtop">
+                  <div class="goodsimg">
+                    <img src="${item.goods_big_logo}" alt="">
+                  </div>
+                </div>
+                <div class="goodsitembottom">
+                    <div>
+                      价格
+                      <span class="price">￥${item.goods_price}</span>
+                    </div>
+                    <p>${item.goods_name}</p>
+                </div>
+              </a>
+            </div>
+            `
+/*
+            str += `
+            <li class="list-item">
+              <div class="panel panel-primary">
+                <div class="panel-body">
+                  <ol class="breadcrumb">
+                    <li><a href="#">${item.cat_one_id}</a></li>
+                    <li><a href="#">${item.cat_two_id}</a></li>
+                    <li class="active">${item.cat_three_id}</li>
+                  </ol>
+                </div>
+                <div class="panel-footer">
+                  <div class="row">
+                    <div class="">
+                      <div class="thumbnail">
+                        <img
+                          src="${item.goods_big_logo}"
+                          alt="...">
+                        <div class="caption">
+                          <h3>${item.goods_name}</h3>
+                          <p>
+                            <i class="glyphicon glyphicon-yen"></i>
+                            <span>${item.goods_price}</span>
+                          </p>
+                          <p><a href="JavaScript:;" class="btn btn-primary" role="button">查找相似商品</a> 
+                             <a href="./detail.html?goods_id=${item.goods_id}" class="btn btn-danger" role="button">查看商品详情</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            
+          `;  */
+          })
+
+          // 循环遍历 res 之后,str中会存储8个li标签
+          // 将这8个li标签,写入到ul中
+          $('.goodscontent').html(str);
+
+
+          // 在请求成功之后,来进行分页显示
+          // 每一个res中的数据信息都包含分页显示需要的参数
+          // 直接使用第一个数据中的信息
+          $('.M-box').pagination({
+            pageCount: res[0]['sumPage'],  // 总页数
+            totalData: res[0]['row'],      // 总数据
+            current:  res[0]['page'],      // 当前页
+            showData:  15,   
+            count:  2,      
+            coping:true ,  
+            homePage: '首页',    
+            endPage:  '末页' ,   
+            prevContent:  '上一页',
+            nextContent:  '下一页',
+
+            // 执行回调函数
+            callback : function(result){
+              // 获取点击标签,表示的页数
+              // console.log( result.getCurrent() );
+
+              // 根据点击的页数,发送ajax请求,获取对应页数的数据,生成新的页面内容
+              getAjax(arr[1] , result.getCurrent() ); 
+            }
+
+        });
+
+        }
+      })
+
+    }
+
+    // 分页显示需要设定的参数数据
+    // 是分页显示插件需要的参数
+    // pageCount:    总页数
+    // totalData:    数据的总数据
+    // current:      当前页数
+    // showData:     每页的数据数量
+    // count:        选中页数的前后页数的总页码
+    // coping:true   是否开启首页和末页
+    // homePage:     首页的内容
+    // endPage:      末页的内容
+    // prevContent:  上一页的内容
+    // nextContent:  下一页的内容
+    // callback : 回调函数
+    //            其中可以定义方法  结果.getCurrent()
+    //                             获取当前点击的分页标签,所表示的页数
+
+
+    // 总结:思路
+
+    // 1, 获取前端传参数据
+    //      window.location.search  获取参数
+    //      decodeURI()             正常显示中文
+    //      因为参数只有一组数据,根据 =等号 将参数,转化为数组
+    //      第一个单元就是键名 第二个单元就是参数数据,也就是查询的关键词
+
+    // 2, 将 ajax 封装为函数  根据关键词,向数据库发送请求
+    //                       根据响应体生成页面 : li标签内容 和 分页显示
+    //    (1),封装函数,定义参数
+    //          参数1:查询的关键词        前端传参
+    //          参数2:查询的页数          默认值是1,之后会根据分页显示修改    
+    //          参数3:每页显示的数据数量   默认值是8,可以根据实际项目情况修改
+    
+    //    (2),ajax请求
+    //          根据相应的3个参数,向PHP程序,发起请求
+    
+    //    (3),请求成功后,执行的函数
+    //        3-1,定义str,存储生成的li标签
+    //        3-2,循环遍历res结果,根据res内容,生成li标签
+    //              str += `模板字符串,内容是li标签内容`
+    //              根据请求数据的结果,来渲染li标签的具体内容
+    //        3-3,将生成的li标签,写入到ul标签中
+    //        3-4,执行分页显示
+    //              根据res中的请求结果,设定分页显示的参数
+    //              在 callback : function(result){} 中 , 再次调用 ajax请求函数
+    //                   result,是执行分页显示的执行结果
+    //                   result.getCurrent()  可以获取点击分页显示,所表示的具体页数
+    //                   这个就是我们分页请求时, ajax请求的参数
+    //                   getAjax(arr[1] , result.getCurrent() ); 
+
+    // 3,给 查看商品详情 标签
+    //      添加跳转地址 以及 对应数据的 goods_id 参数
+  </script>
+
+
+</body>
+
+</html>

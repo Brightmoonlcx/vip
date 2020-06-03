@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/register.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-inner">
+            <div class="logo-left">
+                <a href="../index.html"></a>
+            </div>
+            
+            <div class="logo-right"></div>
+        </div>
+    </div>
+    <div class="contentbox">
+        <div class="content">
+            <div class="login">
+                <div class="login-head">
+                    <div class="fl">会员注册</div>
+                    <div class="fr">已注册可直接登录</div>
+                </div>
+                <div class="login-body">
+                    <form action="">
+                        <input class="phonenumber" type="text" placeholder="请输入手机号码">
+                        <span></span>
+                        <input class="number" type="text" placeholder="请输入验证码">
+                        <span><a>获取验证码</a></span>
+                        <!-- <div class="t-tip"></div> -->
+                        <input class="password1" type="password" placeholder="密码由6-20位字母，数字和符号组合" autocomplete="off">
+                        <span></span>
+                        <input class="password2" type="password" placeholder="请再次输入上面的密码" autocomplete="off">
+                        <span></span>
+                        <input class="check" type="checkbox">
+                        <span>
+                            我已阅读并接受以下条款：《唯品会服务条款》《隐私条款》《唯品支付用户服务协议》
+                        </span>
+                        <input class="submitbutton" type="button" value="立即注册">
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>Copyright 2008-2020 vip.com，All Rights Reserved ICP证：粤 B2-20080329</p>
+    </div>
+</body>
+</html>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+
+    $('.submitbutton').click(function(){
+        //电话号码
+        if($('.phonenumber').val()===''){
+            $('.phonenumber').next().text('账号不能为空');
+            return false;
+        }else{
+            $('.phonenumber').next().text('');
+        }
+        //密码
+        if($('.password1').val()===''){
+            $('.password1').next().text('密码不能为空');
+            return false;
+        }else{
+            $('.password1').next().text('');
+        }
+        //确认密码
+        if($('.password2').val()===''){
+            $('.password2').next().text('密码不能为空');
+            return false;
+        }else{
+            $('.password2').next().text('');
+        }
+        //验证码
+
+
+        
+        $.ajax({
+            url:'../server/goods_res.php',
+            data:{userName:$('.phonenumber').val(),userPwd:$('.password1').val()},
+            type:'post',
+            dataType:'json',
+            success(res){
+                console.log(res);
+                console.log(localStorage.getItem('userName',$('.phonenumber').val()));
+                if(res==1){
+                    window.alert('注册成功')
+                    window.location.href = '../index.html';
+                }else{
+                    window.alert('用户名被占用');
+                }
+            }
+        })
+    })
+
+</script>

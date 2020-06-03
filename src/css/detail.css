@@ -1,0 +1,116 @@
+/* .media img {
+  width: 300px;
+  height: 300px;
+}
+
+p {
+  font-size: 60px;
+  color: red
+} */
+.w1170{
+  width: 1170px;
+  margin: 0 auto;
+}
+/* 头部navbar */
+.header{
+  height: 173px;
+}
+.navbox{
+  height: 30px;
+  background: #f5f5f5;
+  line-height: 30px;
+}
+.navbar-right ul li{   
+  float: left;
+  padding: 0 10px;
+}
+.navbar-right ul li a:hover{
+  color: #d7237e;
+}
+/* 头部导航 */
+/* .new-header{
+  
+} */
+.container{
+  position: relative;
+}
+
+.content{
+  height: 100px;
+}
+.content>a>.logo,.content>a>.logo>img{
+  width: 160px;
+  height: 100px;
+}
+.servicelink{
+  width: 304px;
+  height: 100px;
+  position: relative;
+  /* border: 1px solid black; */
+}
+.servicelink>a{
+  display: inline-block;
+  width: 101px;
+  height: 100px;
+  position: relative;
+  /* float: left; */
+  z-index: 2;
+}
+.servicelink>img{
+  width: 304px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.search-box{
+  width: 453px;
+  height: 60px;
+  margin-top: 33px;
+}
+.search-box .searchinput input{
+  width: 453px;
+  height: 36px;
+}
+.search-box ul li{
+  float: left;
+  padding: 0 5px;
+}
+.goodsCar{
+  width: 96px;
+  height: 34px;
+  border: 1px solid #ccc;
+  margin-top: 35px;
+  text-align: center;
+  line-height: 34px;
+  background: #f6f7f9;
+  border-radius: 2px;
+  margin-left: 34px;
+}
+.nav-head{
+  height: 43px;
+  background: white;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+.nav-head>ul{
+  height: 43px;
+}
+
+.nav-head ul li{
+  float: left;
+  height: 43px;
+  line-height: 43px;
+  text-align: center;
+}
+.shopcategory{
+  width: 156px;
+}
+.nav-head ul li a{
+  font-size: 16px;
+  color: black;
+  font-weight: 700;
+  padding: 0 15px;
+}
